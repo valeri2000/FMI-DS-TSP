@@ -12,7 +12,7 @@ class Graph {
         std::vector<std::list<std::pair<unsigned, unsigned> > > data;
 
     public:
-        Graph();
+        Graph(const unsigned& = 0);
         Graph(std::ifstream&);
 
         void saveToFile(std::ofstream&) const;

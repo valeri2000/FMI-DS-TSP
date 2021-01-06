@@ -1,8 +1,13 @@
 #include "Graph.h"
 #include <cassert>
 
-Graph::Graph() {
-    vertices = edges = 0;
+Graph::Graph(const unsigned& _vertices) {
+    vertices = _vertices;
+    edges = 0;
+
+    if(vertices) {
+        data.resize(vertices);
+    }
 }
 
 Graph::Graph(std::ifstream& in) {
