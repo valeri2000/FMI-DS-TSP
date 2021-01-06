@@ -10,7 +10,7 @@ class GraphGenerator {
     public:
         GraphGenerator() = delete; // TODO, is it necessary
 
-        static void generate(std::ofstream&, const unsigned&, const unsigned&, const unsigned&, const unsigned&);
+        static void generate(std::ofstream&, const unsigned&, const unsigned&, const unsigned&);
 };
 
 #endif

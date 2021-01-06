@@ -6,14 +6,15 @@
 #include <algorithm>
 
 unsigned GraphGenerator::randBetween(const unsigned& left, const unsigned& right) {
-    return left + rand() % (right - left) + 1;
+    return left + rand() % (right - left + 1);
 }
 
-void GraphGenerator::generate(std::ofstream& out, const unsigned& vertices,
-                               const unsigned& edges,
-                               const unsigned& fromWeight,
-                               const unsigned& toWeight) {
+void GraphGenerator::generate(std::ofstream& out, 
+                              const unsigned& vertices,
+                              const unsigned& fromWeight,
+                              const unsigned& toWeight) {
     out << vertices << '\n';
+    unsigned edges = vertices * (vertices - 1) / 2;
 
     srand(time(NULL));
     std::set<std::pair<unsigned, unsigned> > used;
@@ -29,18 +30,14 @@ void GraphGenerator::generate(std::ofstream& out, const unsigned& vertices,
         unsigned v = permutation[i + 1];
 
         used.insert(std::make_pair(u, v));
+        used.insert(std::make_pair(v, u));
         unsigned w = randBetween(fromWeight, toWeight);
 
         out << u << ' ' << v << ' ' << w << '\n';
+        edges--;
     }
 
-    unsigned edgesLeft = edges;
-    if(edges > vertices * (vertices - 1) / 2) {
-        edgesLeft = vertices * (vertices - 1) / 2;
-    }
-
-    edgesLeft = edgesLeft - vertices + 1;
-    while(edgesLeft) {
+    while(edges) {
         unsigned u = randBetween(0, vertices - 2);
         unsigned v = randBetween(u + 1, vertices - 1);
 
@@ -49,11 +46,12 @@ void GraphGenerator::generate(std::ofstream& out, const unsigned& vertices,
         }
 
         used.insert(std::make_pair(u, v));
+        used.insert(std::make_pair(v, u));
         unsigned w = randBetween(fromWeight, toWeight);
 
         out << u << ' ' << v << ' ' << w << '\n';
 
-        edgesLeft--;
+        edges--;
     }
 }
 

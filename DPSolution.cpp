@@ -1,4 +1,5 @@
 #include "DPSolution.h"
+#include <iostream>
 #include <climits>
 
 DPSolution::DPSolution(const MatrixGraph& _g) {
@@ -71,6 +72,7 @@ std::pair<unsigned, std::vector<unsigned> > DPSolution::run() {
     path.push_back(saveVertex);
     path.push_back(0);
 
+    std::cout << "DP\n";
     return std::make_pair(minCost, path);
 }
 
