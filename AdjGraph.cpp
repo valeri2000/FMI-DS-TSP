@@ -1,7 +1,7 @@
-#include "Graph.h"
+#include "AdjGraph.h"
 #include <cassert>
 
-Graph::Graph(const unsigned& _vertices) {
+AdjGraph::AdjGraph(const unsigned& _vertices) {
     vertices = _vertices;
     edges = 0;
 
@@ -10,20 +10,24 @@ Graph::Graph(const unsigned& _vertices) {
     }
 }
 
-Graph::Graph(std::ifstream& in) {
+AdjGraph::AdjGraph(std::ifstream& in) {
     in >> vertices;
     edges = 0;
 
+    unsigned u, v, w;
     while(in) {
-        unsigned u, v, w;
         in >> u >> v >> w;
         addEdge(u, v, w);
     }
 }
 
-void Graph::saveToFile(std::ofstream& out) const {
-    out << vertices << '\n';
+const std::vector<std::pair<unsigned, unsigned> >& AdjGraph::adjacent(const unsigned& u) const {
+    return data[u];
+}
 
+void AdjGraph::saveToFile(std::ofstream& out) const {
+    out << vertices << '\n';
+    
     unsigned u, v, w;
     unsigned pEdges = 0;
     for(unsigned i = 0; i < vertices; ++i) {
@@ -42,21 +46,21 @@ void Graph::saveToFile(std::ofstream& out) const {
     assert(pEdges == edges);
 }
 
-unsigned Graph::V() const {
+unsigned AdjGraph::V() const {
     return vertices;
 }
 
-unsigned Graph::E() const {
+unsigned AdjGraph::E() const {
     return edges;
 }
 
-const std::list<std::pair<unsigned, unsigned> >& Graph::adjacent(const unsigned& v) const {
-    return data[v];
-}
-
-void Graph::addEdge(const unsigned& u, const unsigned& v, const unsigned& w) {
+void AdjGraph::addEdge(const unsigned& u, const unsigned& v, const unsigned& w) {
     data[u].push_back(std::make_pair(v, w));
     data[v].push_back(std::make_pair(u, w));
     edges++;
+}
+
+bool AdjGraph::isMatrixRepr() const {
+    return false;
 }
 
