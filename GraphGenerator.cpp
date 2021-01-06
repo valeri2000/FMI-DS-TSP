@@ -1,4 +1,5 @@
 #include "GraphGenerator.h"
+#include <vector>
 #include <ctime>
 #include <cstdlib>
 #include <set>
@@ -8,18 +9,12 @@ unsigned GraphGenerator::randBetween(const unsigned& left, const unsigned& right
     return left + rand() % (right - left) + 1;
 }
 
-Graph GraphGenerator::generate(const unsigned& vertices,
+void GraphGenerator::generate(std::ofstream& out, const unsigned& vertices,
                                const unsigned& edges,
                                const unsigned& fromWeight,
                                const unsigned& toWeight) {
-    if(edges < vertices - 1 || vertices == 0) {
-        return Graph();
-    }
-    if(vertices == 1) {
-        return Graph(1);
-    }
+    out << vertices << '\n';
 
-    Graph g(vertices);
     srand(time(NULL));
     std::set<std::pair<unsigned, unsigned> > used;
 
@@ -35,7 +30,8 @@ Graph GraphGenerator::generate(const unsigned& vertices,
 
         used.insert(std::make_pair(u, v));
         unsigned w = randBetween(fromWeight, toWeight);
-        g.addEdge(u, v, w);
+
+        out << u << ' ' << v << ' ' << w << '\n';
     }
 
     unsigned edgesLeft = edges;
@@ -54,10 +50,10 @@ Graph GraphGenerator::generate(const unsigned& vertices,
 
         used.insert(std::make_pair(u, v));
         unsigned w = randBetween(fromWeight, toWeight);
-        g.addEdge(u, v, w);
+
+        out << u << ' ' << v << ' ' << w << '\n';
 
         edgesLeft--;
     }
-
-    return g;
 }
+

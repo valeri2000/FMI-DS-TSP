@@ -60,7 +60,3 @@ void AdjGraph::addEdge(const unsigned& u, const unsigned& v, const unsigned& w) 
     edges++;
 }
 
-bool AdjGraph::isMatrixRepr() const {
-    return false;
-}
-

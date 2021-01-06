@@ -53,7 +53,3 @@ void MatrixGraph::addEdge(const unsigned& u, const unsigned& v, const unsigned& 
     edges++;
 }
 
-bool MatrixGraph::isMatrixRepr() const {
-    return true;
-}
-

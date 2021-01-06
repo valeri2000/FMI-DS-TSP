@@ -1,10 +1,10 @@
 #ifndef __MATRIX_GRAPH_H_INCLUDED
 #define __MATRIX_GRAPH_H_INCLUDED
 
-#include "IGraph.h"
+#include <fstream>
 #include <vector>
 
-class MatrixGraph : public IGraph {
+class MatrixGraph {
     private:
         unsigned vertices, edges;
         std::vector<std::vector<unsigned> > matrix;
@@ -13,13 +13,12 @@ class MatrixGraph : public IGraph {
         MatrixGraph(const unsigned& = 0);
         MatrixGraph(std::ifstream&);
 
+        void saveToFile(std::ofstream&) const;
+        unsigned V() const;
+        unsigned E() const;
         const std::vector<unsigned>& adjacentRow(const unsigned&) const;
 
-        virtual void saveToFile(std::ofstream&) const override;
-        virtual unsigned V() const override;
-        virtual unsigned E() const override;
-        virtual void addEdge(const unsigned&, const unsigned&, const unsigned&) override;
-        virtual bool isMatrixRepr() const override;
+        void addEdge(const unsigned&, const unsigned&, const unsigned&);
 };
 
 #endif

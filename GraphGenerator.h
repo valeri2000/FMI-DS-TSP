@@ -1,7 +1,7 @@
 #ifndef __GRAPH_GENERATOR_H_INCLUDED
 #define __GRAPH_GENERATOR_H_INCLUDED
 
-#include "Graph.h"
+#include <fstream>
 
 class GraphGenerator {
     private:
@@ -10,7 +10,7 @@ class GraphGenerator {
     public:
         GraphGenerator() = delete; // TODO, is it necessary
 
-        static Graph generate(const unsigned&, const unsigned&, const unsigned&, const unsigned&);
+        static void generate(std::ofstream&, const unsigned&, const unsigned&, const unsigned&, const unsigned&);
 };
 
 #endif
