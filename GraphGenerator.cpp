@@ -38,7 +38,12 @@ Graph GraphGenerator::generate(const unsigned& vertices,
         g.addEdge(u, v, w);
     }
 
-    unsigned edgesLeft = edges - vertices + 1;
+    unsigned edgesLeft = edges;
+    if(edges > vertices * (vertices - 1) / 2) {
+        edgesLeft = vertices * (vertices - 1) / 2;
+    }
+
+    edgesLeft = edgesLeft - vertices + 1;
     while(edgesLeft) {
         unsigned u = randBetween(0, vertices - 2);
         unsigned v = randBetween(u + 1, vertices - 1);
