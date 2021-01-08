@@ -1,18 +1,18 @@
 #include "DPSolution.h"
 #include <iostream>
-#include <climits>
+#include <limits>
 
 DPSolution::DPSolution(const MatrixGraph& _g) {
     g = &_g;
 }
 
-std::pair<unsigned, std::vector<unsigned> > DPSolution::run() {
+std::pair<double, std::vector<unsigned> > DPSolution::run() {
     unsigned vertices = g->V();
     unsigned lim_set = (1 << vertices) - 1;
 
-    std::vector<std::vector<unsigned> > dp(
+    std::vector<std::vector<double> > dp(
         vertices,
-        std::vector<unsigned>(lim_set, UINT_MAX)
+        std::vector<double>(lim_set, std::numeric_limits<double>::max())
     );
 
     std::vector<std::vector<std::pair<unsigned, unsigned> > > memo(
@@ -35,7 +35,7 @@ std::pair<unsigned, std::vector<unsigned> > DPSolution::run() {
                     }
 
                     if((1 << last2) & new_set) {
-                        unsigned w = g->adjacentRow(last2)[last];
+                        double w = g->adjacentRow(last2)[last];
 
                         if(dp[last][set] > dp[last2][new_set] + w) {
                             dp[last][set] = dp[last2][new_set] + w;
@@ -47,11 +47,11 @@ std::pair<unsigned, std::vector<unsigned> > DPSolution::run() {
         }
     }
 
-    unsigned minCost = UINT_MAX;
+    double minCost = std::numeric_limits<double>::max();
     unsigned saveVertex, saveSet = lim_set - 1;
     for(unsigned i = 1; i < vertices; ++i) {
-        unsigned w = g->adjacentRow(i)[0];
-        unsigned currentCost = dp[i][lim_set - 1] + w;
+        double w = g->adjacentRow(i)[0];
+        double currentCost = dp[i][lim_set - 1] + w;
 
         if(minCost > currentCost) {
             minCost = currentCost;

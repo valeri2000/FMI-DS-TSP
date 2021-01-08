@@ -1,13 +1,14 @@
 #include "BruteSolution.h"
 #include <iostream>
 #include <algorithm>
+#include <limits>
 
 BruteSolution::BruteSolution(const MatrixGraph& _g) {
     g = &_g;
 }
 
-std::pair<unsigned, std::vector<unsigned> > BruteSolution::run() {
-    unsigned minCost = 0;
+std::pair<double, std::vector<unsigned> > BruteSolution::run() {
+    double minCost = std::numeric_limits<double>::max();
     std::vector<unsigned> minPath;
 
     std::vector<unsigned> currentPath;
@@ -17,7 +18,11 @@ std::pair<unsigned, std::vector<unsigned> > BruteSolution::run() {
     }
 
     do {
-        unsigned currentCost = 0, w;
+        if(currentPath[0] == 1) {
+            break;
+        }
+
+        double currentCost = 0, w;
         for(unsigned i = 0; i < vertices - 1; ++i) {
             w = g->adjacentRow(currentPath[i])[currentPath[i + 1]];
             currentCost += w;
@@ -25,7 +30,7 @@ std::pair<unsigned, std::vector<unsigned> > BruteSolution::run() {
         w = g->adjacentRow(currentPath.back())[currentPath[0]];
         currentCost += w;
 
-        if(currentCost < minCost || minCost == 0) {
+        if(currentCost < minCost) {
             minCost = currentCost;
             minPath = currentPath;
             minPath.push_back(currentPath[0]);

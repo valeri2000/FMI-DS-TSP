@@ -8,10 +8,10 @@
 
 int main() {
     std::ofstream out("gen.txt");
-    GraphGenerator::generate(out, 1000, 1, 10);
+    GraphGenerator::generate(out, 10, 1, 10);
     out.close();
 
-    std::ifstream in("gen.txt");
+    std::ifstream in("graph2.txt");
     MatrixGraph g(in);
 
     std::cout << "Finished generating\n\n";
@@ -34,24 +34,25 @@ int main() {
     std::cout << '\n';
     delete sol4;
 
-    //ISolution* sol2 = new DPSolution(g);
-    //res = sol2->run();
-    //std::cout << res.first << " -> ";
-    //for(const unsigned& v : res.second) {
-        //std::cout << v << ' ';
-    //}
-    //std::cout << '\n';
-    //delete sol2;
+    ISolution* sol2 = new DPSolution(g);
+    res = sol2->run();
+    std::cout << res.first << " -> ";
+    for(const unsigned& v : res.second) {
+        std::cout << v << ' ';
+    }
+    std::cout << '\n';
+    delete sol2;
 
-    //ISolution* sol = new BruteSolution(g);
-    //res = sol->run();
-    //std::cout << res.first << " -> ";
-    //for(const unsigned& v : res.second) {
-        //std::cout << v << ' ';
-    //}
-    //std::cout << '\n';
-    //delete sol;
+    ISolution* sol = new BruteSolution(g);
+    res = sol->run();
+    std::cout << res.first << " -> ";
+    for(const unsigned& v : res.second) {
+        std::cout << v << ' ';
+    }
+    std::cout << '\n';
+    delete sol;
 
     in.close();
     return 0;
 }
+

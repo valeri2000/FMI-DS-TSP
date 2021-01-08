@@ -5,7 +5,7 @@
 
 class GraphGenerator {
     private:
-        static unsigned randBetween(const unsigned&, const unsigned&);
+        static double randBetween(const unsigned&, const unsigned&);
 
     public:
         GraphGenerator() = delete; // TODO, is it necessary

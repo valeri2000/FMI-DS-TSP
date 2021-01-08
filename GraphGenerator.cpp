@@ -2,8 +2,8 @@
 #include <ctime>
 #include <cstdlib>
 
-unsigned GraphGenerator::randBetween(const unsigned& left, const unsigned& right) {
-    return left + rand() % (right - left + 1);
+double GraphGenerator::randBetween(const unsigned& left, const unsigned& right) {
+    return 1.0 * (left + rand() % (right - left + 1));
 }
 
 void GraphGenerator::generate(std::ofstream& out, 

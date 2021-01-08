@@ -7,7 +7,7 @@
 class MatrixGraph {
     private:
         unsigned vertices, edges;
-        std::vector<std::vector<unsigned> > matrix;
+        std::vector<std::vector<double> > matrix;
 
     public:
         MatrixGraph(const unsigned& = 0);
@@ -16,9 +16,9 @@ class MatrixGraph {
         void saveToFile(std::ofstream&) const;
         unsigned V() const;
         unsigned E() const;
-        const std::vector<unsigned>& adjacentRow(const unsigned&) const;
+        const std::vector<double>& adjacentRow(const unsigned&) const;
 
-        void addEdge(const unsigned&, const unsigned&, const unsigned&);
+        void addEdge(const unsigned&, const unsigned&, const double&);
 };
 
 #endif

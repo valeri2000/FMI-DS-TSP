@@ -1,16 +1,16 @@
 #include "NNSolution.h"
-#include <climits>
+#include <limits>
 #include <iostream>
 
 NNSolution::NNSolution(const MatrixGraph& _g) {
     g = &_g;
 }
 
-std::pair<unsigned, std::vector<unsigned> > NNSolution::run() {
+std::pair<double, std::vector<unsigned> > NNSolution::run() {
     unsigned vertices = g->V();
     std::vector<bool> visited(vertices, false);
 
-    unsigned cost = 0;
+    double cost = 0;
     std::vector<unsigned> path;
 
     path.push_back(0);
@@ -18,8 +18,10 @@ std::pair<unsigned, std::vector<unsigned> > NNSolution::run() {
     unsigned left = vertices - 1;
     while(left) {
         unsigned lastVertex = path.back();
-        unsigned newVertex, minEdge = UINT_MAX;
-        const std::vector<unsigned>& edges = g->adjacentRow(lastVertex);
+        unsigned newVertex;
+        double minEdge = std::numeric_limits<double>::max();
+        const std::vector<double>& edges = g->adjacentRow(lastVertex);
+
         for(unsigned i = 0; i < vertices; ++i) {
             if(!visited[i] && minEdge > edges[i]) {
                 newVertex = i;
@@ -37,3 +39,4 @@ std::pair<unsigned, std::vector<unsigned> > NNSolution::run() {
     std::cout << "Nearest neighbour\n";
     return std::make_pair(cost, path);
 }
+

@@ -7,7 +7,7 @@
 class ISolution {
     public:
         virtual ~ISolution() { }
-        virtual std::pair<unsigned, std::vector<unsigned> > run() = 0; // result, path
+        virtual std::pair<double, std::vector<unsigned> > run() = 0; // result, path
 };
 
 #endif

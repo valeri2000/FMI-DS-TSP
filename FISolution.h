@@ -13,7 +13,7 @@ class FISolution : public ISolution {
     public:
         FISolution(const MatrixGraph&);
 
-        virtual std::pair<unsigned, std::vector<unsigned> > run() override;
+        virtual std::pair<double, std::vector<unsigned> > run() override;
 };
 
 #endif
