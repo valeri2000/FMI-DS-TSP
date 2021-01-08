@@ -8,7 +8,7 @@
 
 int main() {
     std::ofstream out("gen.txt");
-    GraphGenerator::generate(out, 1000, 1, 100);
+    GraphGenerator::generate(out, 1000, 1, 10);
     out.close();
 
     std::ifstream in("gen.txt");
