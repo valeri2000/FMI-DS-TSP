@@ -10,6 +10,7 @@ class DPSolution : public ISolution {
 
     public:
         DPSolution(const MatrixGraph&);
+        DPSolution(const MatrixGraph*);
 
         virtual std::pair<double, std::vector<unsigned> > run() override;
         virtual std::string getName() const override;

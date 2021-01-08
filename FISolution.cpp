@@ -22,6 +22,10 @@ FISolution::FISolution(const MatrixGraph& _g) {
     g = &_g;
 }
 
+FISolution::FISolution(const MatrixGraph* _g) {
+    g = _g;
+}
+
 std::pair<double, std::vector<unsigned> > FISolution::run() {
     unsigned vertices = g->V();
     std::vector<bool> visited(vertices, false);

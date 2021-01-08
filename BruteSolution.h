@@ -10,6 +10,7 @@ class BruteSolution : public ISolution {
 
     public:
         BruteSolution(const MatrixGraph&);
+        BruteSolution(const MatrixGraph*);
 
         virtual std::pair<double, std::vector<unsigned> > run() override;
         virtual std::string getName() const override;

@@ -5,6 +5,10 @@ DPSolution::DPSolution(const MatrixGraph& _g) {
     g = &_g;
 }
 
+DPSolution::DPSolution(const MatrixGraph* _g) {
+    g = _g;
+}
+
 std::pair<double, std::vector<unsigned> > DPSolution::run() {
     unsigned vertices = g->V();
     unsigned lim_set = (1 << vertices) - 1;

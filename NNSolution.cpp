@@ -5,6 +5,10 @@ NNSolution::NNSolution(const MatrixGraph& _g) {
     g = &_g;
 }
 
+NNSolution::NNSolution(const MatrixGraph* _g) {
+    g = _g;
+}
+
 std::pair<double, std::vector<unsigned> > NNSolution::run() {
     unsigned vertices = g->V();
     std::vector<bool> visited(vertices, false);
