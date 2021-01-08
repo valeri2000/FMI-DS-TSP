@@ -6,48 +6,41 @@
 #include "ISolution.h"
 #include "GraphGenerator.h"
 #include "TestData.h"
+#include "Benchmark.h"
 
 int main() {
     std::ifstream t1("tests/dj38.tsp"), st1("tests/dj38-tour.txt");
-    TestData T(t1, st1);
+    TestData T1(t1, st1);
     t1.close();
     st1.close();
-    ISolution* sol = new FISolution(T.getGraph());
 
-    std::cout << sol->getName() << '\n';
-    auto res = sol->run();
-    std::cout << res.first << ": ";
-    for(const unsigned& v : res.second) {
-        std::cout << v << ' ';
-    }
-    std::cout << '\n';
+    t1.open("tests/ar9152.tsp");
+    st1.open("tests/ar9152-tour.txt");
+    TestData T2(t1, st1);
+    t1.close();
+    st1.close();
 
-    std::cout << "Test data name: " << T.getName() << '\n';
-    std::cout << "Test data solution: " << T.getMinTourCost() << '\n';
+    t1.open("tests/ho14473.tsp");
+    st1.open("tests/ho14473-tour.txt");
+    TestData T3(t1, st1);
+    t1.close();
+    st1.close();
 
-    delete sol;
-    //MatrixGraph g = GraphGenerator::generate(10, 1, 12);
-    //std::vector<ISolution*> sols;
+    std::vector<TestData*> tests;
+    tests.push_back(&T1);
+    tests.push_back(&T2);
+    tests.push_back(&T3);
 
-    //sols.push_back(new BruteSolution(g));
-    //sols.push_back(new DPSolution(g));
-    //sols.push_back(new NNSolution(g));
-    //sols.push_back(new FISolution(g));
+    std::vector<ISolution*> sols;
+    sols.push_back(new NNSolution());
+    sols.push_back(new FISolution());
+    sols.push_back(new BruteSolution());
+    sols.push_back(new DPSolution());
 
-    //for(ISolution* sol : sols) {
-        //auto res = sol->run();
-        //std::cout << sol->getName() << '\n';
-        //std::cout << res.first << ": ";
-        //for(const unsigned v : res.second) {
-            //std::cout << v << ' ';
-        //}
-        //std::cout << '\n';
-        //std::cout << '\n';
-    //}
-
-    //for(ISolution* sol : sols) {
-        //delete sol;
-    //}
+    Benchmark::runRandomized(sols, 10, 1, 15, false);
+    sols.pop_back();
+    sols.pop_back();
+    Benchmark::runHeuristics(sols, tests, false);
 
     return 0;
 }

@@ -1,15 +1,7 @@
 #include "NNSolution.h"
 #include <limits>
 
-NNSolution::NNSolution(const MatrixGraph& _g) {
-    g = &_g;
-}
-
-NNSolution::NNSolution(const MatrixGraph* _g) {
-    g = _g;
-}
-
-std::pair<double, std::vector<unsigned> > NNSolution::run() {
+std::pair<double, std::vector<unsigned> > NNSolution::run(const MatrixGraph* g) {
     unsigned vertices = g->V();
     std::vector<bool> visited(vertices, false);
 

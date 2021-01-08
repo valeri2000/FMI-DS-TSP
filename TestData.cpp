@@ -25,6 +25,7 @@ TestData::TestData(std::ifstream& in, std::ifstream& solIn) : g(nullptr) {
     unsigned vertices;
     in >> name;
     in >> vertices;
+    name += ("(" + std::to_string(vertices) + ")");
 
     std::vector<std::pair<double, double> > vertices2D(vertices);
 

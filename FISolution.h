@@ -3,18 +3,15 @@
 
 #include "ISolution.h"
 #include "MatrixGraph.h"
+#include <unordered_set>
 
 class FISolution : public ISolution {
     private:
-        const MatrixGraph* g;
-
-        unsigned getMaxUnvisitedOf(const unsigned&, const std::vector<bool>&);
+        unsigned getMaxUnvisitedOf(const unsigned&, const MatrixGraph*, 
+                                   const std::vector<bool>&);
 
     public:
-        FISolution(const MatrixGraph&);
-        FISolution(const MatrixGraph*);
-
-        virtual std::pair<double, std::vector<unsigned> > run() override;
+        virtual std::pair<double, std::vector<unsigned> > run(const MatrixGraph*) override;
         virtual std::string getName() const override;
 };
 

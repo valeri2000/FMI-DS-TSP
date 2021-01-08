@@ -1,7 +1,8 @@
 #include "FISolution.h"
 #include <limits>
 
-unsigned FISolution::getMaxUnvisitedOf(const unsigned& u, const std::vector<bool>& visited) {
+unsigned FISolution::getMaxUnvisitedOf(const unsigned& u, const MatrixGraph* g,
+                                       const std::vector<bool>& visited) {
     unsigned bestVertex = 0;
     double maxEdge = 0;
 
@@ -18,15 +19,7 @@ unsigned FISolution::getMaxUnvisitedOf(const unsigned& u, const std::vector<bool
     return bestVertex;
 }
 
-FISolution::FISolution(const MatrixGraph& _g) {
-    g = &_g;
-}
-
-FISolution::FISolution(const MatrixGraph* _g) {
-    g = _g;
-}
-
-std::pair<double, std::vector<unsigned> > FISolution::run() {
+std::pair<double, std::vector<unsigned> > FISolution::run(const MatrixGraph* g) {
     unsigned vertices = g->V();
     std::vector<bool> visited(vertices, false);
 
@@ -34,7 +27,7 @@ std::pair<double, std::vector<unsigned> > FISolution::run() {
     visited[0] = true;
     path.push_back(0);
 
-    unsigned newFarthest = getMaxUnvisitedOf(0, visited);
+    unsigned newFarthest = getMaxUnvisitedOf(0, g, visited);
     visited[newFarthest] = true;
     path.push_back(newFarthest);
     path.push_back(0);
@@ -80,14 +73,16 @@ std::pair<double, std::vector<unsigned> > FISolution::run() {
             }
         }
 
-        std::vector<unsigned> newPath;
-        for(unsigned i = 0; i < tourSize; ++i) {
-            newPath.push_back(path[i]);
-            if(i == bestPos) {
-                newPath.push_back(newFarthest);
-            }
-        }
-        path = newPath;
+        path.insert(path.begin() + bestPos + 1, newFarthest);
+
+        //std::vector<unsigned> newPath;
+        //for(unsigned i = 0; i < tourSize; ++i) {
+            //newPath.push_back(path[i]);
+            //if(i == bestPos) {
+                //newPath.push_back(newFarthest);
+            //}
+        //}
+        //path = newPath;
 
         left--;
     }

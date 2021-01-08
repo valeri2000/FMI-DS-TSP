@@ -5,14 +5,8 @@
 #include "MatrixGraph.h"
 
 class NNSolution : public ISolution {
-    private:
-        const MatrixGraph* g;
-
     public:
-        NNSolution(const MatrixGraph&);
-        NNSolution(const MatrixGraph*);
-
-        virtual std::pair<double, std::vector<unsigned> > run() override;
+        virtual std::pair<double, std::vector<unsigned> > run(const MatrixGraph*) override;
         virtual std::string getName() const override;
 };
 

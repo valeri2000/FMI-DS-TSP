@@ -2,15 +2,7 @@
 #include <algorithm>
 #include <limits>
 
-BruteSolution::BruteSolution(const MatrixGraph& _g) {
-    g = &_g;
-}
-
-BruteSolution::BruteSolution(const MatrixGraph* _g) {
-    g = _g;
-}
-
-std::pair<double, std::vector<unsigned> > BruteSolution::run() {
+std::pair<double, std::vector<unsigned> > BruteSolution::run(const MatrixGraph* g) {
     double minCost = std::numeric_limits<double>::max();
     std::vector<unsigned> minPath;
 
