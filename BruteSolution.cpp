@@ -1,5 +1,4 @@
 #include "BruteSolution.h"
-#include <iostream>
 #include <algorithm>
 #include <limits>
 
@@ -37,7 +36,10 @@ std::pair<double, std::vector<unsigned> > BruteSolution::run() {
         }
     } while(std::next_permutation(currentPath.begin(), currentPath.end()));
 
-    std::cout << "BF\n";
     return std::make_pair(minCost, minPath);
+}
+
+std::string BruteSolution::getName() const {
+    return "Brute Force Solution";
 }
 

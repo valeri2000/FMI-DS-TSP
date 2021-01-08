@@ -1,5 +1,4 @@
 #include "FISolution.h"
-#include <iostream>
 #include <limits>
 
 unsigned FISolution::getMaxUnvisitedOf(const unsigned& u, const std::vector<bool>& visited) {
@@ -94,7 +93,10 @@ std::pair<double, std::vector<unsigned> > FISolution::run() {
         cost += g->adjacentRow(path[i])[path[i + 1]];
     }
 
-    std::cout << "Farthest insertion\n";
     return std::make_pair(cost, path);
+}
+
+std::string FISolution::getName() const {
+    return "Farthest Insertion solution";
 }
 

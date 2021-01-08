@@ -7,7 +7,7 @@
 #include "GraphGenerator.h"
 
 int main() {
-    MatrixGraph g = GraphGenerator::generate(10, 1, 12);
+    MatrixGraph g = GraphGenerator::generate(11, 1, 12);
     std::vector<ISolution*> sols;
 
     sols.push_back(new BruteSolution(g));
@@ -17,10 +17,12 @@ int main() {
 
     for(ISolution* sol : sols) {
         auto res = sol->run();
+        std::cout << sol->getName() << '\n';
         std::cout << res.first << ": ";
         for(const unsigned v : res.second) {
             std::cout << v << ' ';
         }
+        std::cout << '\n';
         std::cout << '\n';
     }
 

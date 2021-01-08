@@ -1,6 +1,5 @@
 #include "NNSolution.h"
 #include <limits>
-#include <iostream>
 
 NNSolution::NNSolution(const MatrixGraph& _g) {
     g = &_g;
@@ -36,7 +35,10 @@ std::pair<double, std::vector<unsigned> > NNSolution::run() {
     cost += g->adjacentRow(path.back())[0];
     path.push_back(0);
 
-    std::cout << "Nearest neighbour\n";
     return std::make_pair(cost, path);
+}
+
+std::string NNSolution::getName() const {
+    return "Nearest Neighbour solution";
 }
 
