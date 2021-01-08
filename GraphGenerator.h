@@ -2,6 +2,7 @@
 #define __GRAPH_GENERATOR_H_INCLUDED
 
 #include <fstream>
+#include "MatrixGraph.h"
 
 class GraphGenerator {
     private:
@@ -10,7 +11,8 @@ class GraphGenerator {
     public:
         GraphGenerator() = delete; // TODO, is it necessary
 
-        static void generate(std::ofstream&, const unsigned&, const unsigned&, const unsigned&);
+        static void generateToFile(std::ofstream&, const unsigned&, const unsigned&, const unsigned&);
+        static MatrixGraph generate(const unsigned&, const unsigned&, const unsigned&);
 };
 
 #endif

@@ -7,52 +7,27 @@
 #include "GraphGenerator.h"
 
 int main() {
-    std::ofstream out("gen.txt");
-    GraphGenerator::generate(out, 10, 1, 10);
-    out.close();
+    MatrixGraph g = GraphGenerator::generate(10, 1, 12);
+    std::vector<ISolution*> sols;
 
-    std::ifstream in("graph2.txt");
-    MatrixGraph g(in);
+    sols.push_back(new BruteSolution(g));
+    sols.push_back(new DPSolution(g));
+    sols.push_back(new NNSolution(g));
+    sols.push_back(new FISolution(g));
 
-    std::cout << "Finished generating\n\n";
-
-    ISolution* sol3 = new NNSolution(g);
-    auto res = sol3->run();
-    std::cout << res.first << " -> ";
-    for(const unsigned& v : res.second) {
-        std::cout << v << ' ';
+    for(ISolution* sol : sols) {
+        auto res = sol->run();
+        std::cout << res.first << ": ";
+        for(const unsigned v : res.second) {
+            std::cout << v << ' ';
+        }
+        std::cout << '\n';
     }
-    std::cout << '\n';
-    delete sol3;
 
-    ISolution* sol4 = new FISolution(g);
-    res = sol4->run();
-    std::cout << res.first << " -> ";
-    for(const unsigned& v : res.second) {
-        std::cout << v << ' ';
+    for(ISolution* sol : sols) {
+        delete sol;
     }
-    std::cout << '\n';
-    delete sol4;
 
-    ISolution* sol2 = new DPSolution(g);
-    res = sol2->run();
-    std::cout << res.first << " -> ";
-    for(const unsigned& v : res.second) {
-        std::cout << v << ' ';
-    }
-    std::cout << '\n';
-    delete sol2;
-
-    ISolution* sol = new BruteSolution(g);
-    res = sol->run();
-    std::cout << res.first << " -> ";
-    for(const unsigned& v : res.second) {
-        std::cout << v << ' ';
-    }
-    std::cout << '\n';
-    delete sol;
-
-    in.close();
     return 0;
 }
 
