@@ -14,7 +14,7 @@ App::App() {
     sols.push_back(new BruteSolution());
     sols.push_back(new DPSolution());
 
-    std::cout << "Loaded test data and solutions!\n";
+    std::cout << "Loaded test data and solutions!\n\n";
 }
 
 void App::addTest(const std::string& nameIn, const std::string& nameSol) {

@@ -99,6 +99,8 @@ void Benchmark::runHeuristics(
     if(shouldPlot) {
         plotTimeHeur(timeData);
         plotErrorHeur(errorData);
+        std::cout << "Time comparison plot saved to 'heurstics-time.png'\n";
+        std::cout << "Error comparison plot saved to 'heurstics-error.png'\n";
     }
 }
 
@@ -132,5 +134,10 @@ void Benchmark::runRandomized(
     }
 
     std::cout << '\n';
+
+    std::ofstream out("graph.txt");
+    g.saveToFile(out);
+    out.close();
+    std::cout << "Generated graph saved to 'graph.txt'\n";
 }
 
